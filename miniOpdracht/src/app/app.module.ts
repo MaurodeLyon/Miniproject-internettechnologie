@@ -8,10 +8,12 @@ import {HomeComponent} from './components/home.component';
 import {DetailComponent} from './components/detail.component';
 import {StatisticsComponent} from './components/statistics.component';
 import {routing} from './app.routing';
+import { ChartsModule } from 'ng2-charts';
+
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, DetailComponent, StatisticsComponent],
-  imports: [BrowserModule, FormsModule, HttpModule, routing],
+  imports: [BrowserModule, FormsModule, HttpModule, routing, ChartsModule],
   providers: [],
   bootstrap: [AppComponent]
 })
