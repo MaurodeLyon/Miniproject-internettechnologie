@@ -1,3 +1,26 @@
+<button class="btn btn-primary btn-lg col-xs-12" data-toggle="collapse" data-target="#create">Create person</button>
+<div id="create" class="collapse col-xs-12">
+  <div>
+    <label>First name:</label>
+    <input [(ngModel)]="newPerson.first_name"/>
+  </div>
+  <div>
+    <label>Last name:</label>
+    <input [(ngModel)]="newPerson.last_name"/>
+  </div>
+  <div>
+    <label>Age:</label>
+    <input [(ngModel)]="newPerson.age" type="number" min="0" max="420"/>
+  </div>
+  <div>
+    <label>Gender:</label>
+    <select [(ngModel)]="newPerson.gender">
+      <option value="M">Male</option>
+      <option value="F">Female</option>
+    </select>
+  </div>
+  <button class="btn btn-success" data-toggle="collapse" data-target="#create" (click)="addPerson()">Add person</button>
+</div>
 <div class="container col-xs-9">
   <table class="table table-striped">
     <thead>

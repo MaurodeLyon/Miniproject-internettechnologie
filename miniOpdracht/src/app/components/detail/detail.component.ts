@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import  {PostsService} from '../../services/posts.service';
+import {PostsService} from '../../services/posts.service';
 import {Person} from './Person';
 
 @Component({
@@ -11,9 +11,17 @@ import {Person} from './Person';
 export class DetailComponent {
   persons: Person[];
   selectedPerson: Person;
+  newPerson: Person;
 
-  constructor(private  postsService: PostsService) {
+  constructor(private postsService: PostsService) {
     this.persons = this.postsService.getPosts();
+    this.newPerson = new Person();
+  }
+
+  addPerson(): void {
+    this.newPerson.id = this.persons.length + 1;
+    this.persons.push(this.newPerson);
+    this.newPerson = new Person();
   }
 
   onSelect(person: Person): void {
