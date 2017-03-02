@@ -9,11 +9,9 @@ import  {PostsService} from '../services/posts.service';
 
 export class DetailComponent {
   persons: Person[];
-  name: string;
 
   constructor(private  postsService: PostsService) {
     this.persons = this.postsService.getPosts();
-    this.name = 'TestName';
   }
 }
 
