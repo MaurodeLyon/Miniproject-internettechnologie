@@ -1,24 +1,22 @@
 import {Component} from '@angular/core';
-import  {PostsService} from '../services/posts.service';
+import  {PostsService} from '../../services/posts.service';
+import {Person} from './Person';
 
 @Component({
   selector: 'detail',
-  templateUrl: './detail.component.html',
+  templateUrl: 'detail.component.html',
   providers: [PostsService]
 })
 
 export class DetailComponent {
   persons: Person[];
+  selectedPerson: Person;
 
   constructor(private  postsService: PostsService) {
     this.persons = this.postsService.getPosts();
   }
-}
 
-interface Person {
-  id: number
-  first_name: string
-  last_name: string
-  age: number
-  gender: string
+  onSelect(person: Person): void{
+    this.selectedPerson = person;
+  }
 }

@@ -1,0 +1,23 @@
+<div *ngIf="person" class="text-left">
+  <h2>{{person.first_name}} {{person.last_name}}</h2>
+  <div>
+    <label>ID:</label>
+    <label>{{person.id}}</label>
+  </div>
+  <div>
+    <label>First name:</label>
+    <input [(ngModel)]="person.first_name"/>
+  </div>
+  <div>
+    <label>Last name:</label>
+    <input [(ngModel)]="person.last_name"/>
+  </div>
+  <div>
+    <label>Age:</label>
+    <input [(ngModel)]="person.age"/>
+  </div>
+  <div>
+    <label>Gender:</label>
+    <input [(ngModel)]="person.gender"/>
+  </div>
+</div>
