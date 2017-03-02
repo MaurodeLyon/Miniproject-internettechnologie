@@ -1,6 +1,6 @@
 <script src="node_modules/chart.js/src/chart.js"></script>
 <h1>Statistics page</h1>
-<div class is col-xs-6>
+<div class="col-xs-4">
   <div style="display: block">
     <canvas baseChart
             [datasets]="barChartData"
@@ -13,7 +13,7 @@
   </div>
   <button (click)="randomize()">Update</button>
 </div>
-<div class is col-xs-6 style="display: block">
+<div class="col-xs-4" style="display: block">
   <canvas baseChart
           [data]="genderPieChartData"
           [labels]="genderPieChartLabels"
@@ -21,7 +21,7 @@
           (chartHover)="chartHovered($event)"
           (chartClick)="chartClicked($event)"></canvas>
 </div>
-<div class is col-xs-6 style="display: block">
+<div class="col-xs-4" style="display: block">
   <canvas baseChart
           [data]="agePieChartData"
           [labels]="agePieChartLabels"

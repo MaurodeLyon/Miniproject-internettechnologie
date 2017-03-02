@@ -56,7 +56,7 @@ export class StatisticsComponent {
   public agePieChartType:string = 'pie';
 
   constructor(private  postsService: PostsService) {
-    this.persons = this.postsService.getPosts();
+    this.persons = this.postsService.getPersons();
     this.genGenderPieData();
     this.genAgePieData();
   }
