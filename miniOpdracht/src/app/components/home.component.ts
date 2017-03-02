@@ -1,16 +1,29 @@
 import {Component} from '@angular/core';
+import {PostsService} from '../services/posts.service';
 
 @Component({
   selector: 'home',
   template: `<h1>Home page</h1>
-            <div>
-                  <img [src]="'http://vignette1.wikia.nocookie.net/sanicsource/images/e/e3/Sonicwut.jpg/revision/latest?cb=20160121233101The'" />
+            <div *ngFor="let post of posts">
+              <h3>{{post.title}}</h3>
+              <p>{{post.body }}</p>
             </div>
-            <h3>huehuehuehuehuegheg</h3>
-            `
+            `,
+  providers: [PostsService]
 })
 
 export class HomeComponent {
+  posts: Post[];
 
+  constructor(private postsService: PostsService) {
+    this.postsService.getPosts().subscribe(posts => {
+      this.posts = posts
+    })
+  }
+}
 
+interface Post {
+  id: number;
+  title: string;
+  body: string;
 }

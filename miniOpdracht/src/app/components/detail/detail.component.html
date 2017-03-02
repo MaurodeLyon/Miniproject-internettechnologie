@@ -1,3 +1,37 @@
+<button class="btn btn-primary btn-lg col-xs-12" data-toggle="modal" data-target="#create">Create person</button>
+<div id="create" class="modal fade col-xs-12" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <label>Enter information about person</label>
+      </div>
+      <div class="modal-body">
+        <div>
+          <label>First name:</label>
+          <input [(ngModel)]="newPerson.first_name"/>
+        </div>
+        <div>
+          <label>Last name:</label>
+          <input [(ngModel)]="newPerson.last_name"/>
+        </div>
+        <div>
+          <label>Age:</label>
+          <input [(ngModel)]="newPerson.age" type="number" min="0" max="420"/>
+        </div>
+        <div>
+          <label>Gender:</label>
+          <select [(ngModel)]="newPerson.gender">
+            <option value="M">Male</option>
+            <option value="F">Female</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-success" data-dismiss="modal" (click)="addPerson()">Add person</button>
+      </div>
+    </div>
+  </div>
+</div>
 <div class="container col-xs-9">
   <table class="table table-striped">
     <thead>
@@ -8,13 +42,19 @@
       <th class="col-xs-3">Firstname</th>
       <th class="col-xs-3">Lastname</th>
       <th class="col-xs-2">Age</th>
-      <th class="col-xs-2">Gender</th>
+      <th class="col-xs-1">Gender</th>
     </tr>
     </thead>
     <tbody *ngFor="let person of persons">
     <tr>
-      <td><button class="btn btn-info" (click)="onSelect(person)"><span class="glyphicon glyphicon-pencil"></span></button></td>
-      <td><button class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button></td>
+      <td>
+        <button class="btn btn-info" (click)="onSelect(person)"><span class="glyphicon glyphicon-pencil"></span>
+        </button>
+      </td>
+      <td>
+        <button class="btn btn-danger" (click)="removePerson(person)"><span class="glyphicon glyphicon-trash"></span>
+        </button>
+      </td>
       <td>{{person.id}}</td>
       <td>{{person.first_name}}</td>
       <td>{{person.last_name}}</td>
@@ -25,5 +65,7 @@
   </table>
 </div>
 <div class="container-fluid col-xs-3">
-  <person-detail [person]="selectedPerson"></person-detail>
+  <nav data-spy="affix">
+    <person-detail [person]="selectedPerson"></person-detail>
+  </nav>
 </div>

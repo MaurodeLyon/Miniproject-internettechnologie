@@ -14,10 +14,13 @@
   </div>
   <div>
     <label>Age:</label>
-    <input [(ngModel)]="person.age"/>
+    <input [(ngModel)]="person.age" type="number" min="0" max="420"/>
   </div>
   <div>
     <label>Gender:</label>
-    <input [(ngModel)]="person.gender"/>
+    <select [(ngModel)]="person.gender">
+      <option value="M">Male</option>
+      <option value="F">Female</option>
+    </select>
   </div>
 </div>
