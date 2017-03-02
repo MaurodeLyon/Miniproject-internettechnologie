@@ -14,7 +14,7 @@
     <tbody *ngFor="let person of persons">
     <tr>
       <td><button class="btn btn-info" (click)="onSelect(person)"><span class="glyphicon glyphicon-pencil"></span></button></td>
-      <td><button class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button></td>
+      <td><button class="btn btn-danger" (click)="removePerson(person)"><span class="glyphicon glyphicon-trash"></span></button></td>
       <td>{{person.id}}</td>
       <td>{{person.first_name}}</td>
       <td>{{person.last_name}}</td>
