@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import Chart from 'chart.js'
 
 @Component({
   selector: 'statistics',
@@ -7,4 +8,6 @@ import {Component} from '@angular/core';
 
 export class StatisticsComponent {
 
+
+  constructor() {};
 }
