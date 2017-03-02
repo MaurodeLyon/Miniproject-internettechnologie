@@ -8,6 +8,10 @@ export class PostsService {
     console.log('PostsService Initialized...')
   }
 
+  getWeather() {
+    return this.http.get('http://weathers.co/api.php?city=Breda').map(res => res.json());
+  }
+
   getPosts() {
     return Persons;
   }
