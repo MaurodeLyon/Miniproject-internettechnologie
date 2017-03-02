@@ -32,7 +32,7 @@ export class DetailComponent {
   newPerson: Person;
 
   constructor(private postsService: PostsService) {
-    this.persons = this.postsService.getPosts();
+    this.persons = this.postsService.getPersons();
     this.newPerson = new Person();
   }
 
