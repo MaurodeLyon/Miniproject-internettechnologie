@@ -1,0 +1,31 @@
+<script src="node_modules/chart.js/src/chart.js"></script>
+<h1>Statistics page</h1>
+<div class is col-xs-6>
+  <div style="display: block">
+    <canvas baseChart
+            [datasets]="barChartData"
+            [labels]="barChartLabels"
+            [options]="barChartOptions"
+            [legend]="barChartLegend"
+            [chartType]="barChartType"
+            (chartHover)="chartHovered($event)"
+            (chartClick)="chartClicked($event)"></canvas>
+  </div>
+  <button (click)="randomize()">Update</button>
+</div>
+<div class is col-xs-6 style="display: block">
+  <canvas baseChart
+          [data]="genderPieChartData"
+          [labels]="genderPieChartLabels"
+          [chartType]="genderPieChartType"
+          (chartHover)="chartHovered($event)"
+          (chartClick)="chartClicked($event)"></canvas>
+</div>
+<div class is col-xs-6 style="display: block">
+  <canvas baseChart
+          [data]="agePieChartData"
+          [labels]="agePieChartLabels"
+          [chartType]="agePieChartType"
+          (chartHover)="chartHovered($event)"
+          (chartClick)="chartClicked($event)"></canvas>
+</div>

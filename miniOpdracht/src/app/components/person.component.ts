@@ -3,7 +3,7 @@ import {Person} from './Person';
 
 @Component({
   selector: 'person-detail',
-  templateUrl: './person.component.html'
+  templateUrl: 'person.component.html'
 })
 
 export class PersonComponent {

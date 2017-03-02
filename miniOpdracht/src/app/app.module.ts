@@ -8,7 +8,7 @@ import {AppComponent} from './app.component';
 import {HomeComponent} from './components/home.component';
 import {StatisticsComponent} from './components/statistics.component';
 import {DetailComponent} from './components/detail/detail.component';
-import {PersonComponent} from './components/detail/person.component';
+import {PersonComponent} from './components/person.component';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, DetailComponent, StatisticsComponent,PersonComponent],
