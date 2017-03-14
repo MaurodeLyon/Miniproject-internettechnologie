@@ -1,0 +1,33 @@
+<script src="node_modules/chart.js/src/chart.js"></script>
+<h1>Current Energy Consumption</h1>
+<div class="col-xs-4">
+  <div style="display: block">
+    <canvas baseChart
+            [datasets]="barChartData"
+            [labels]="barChartLabels"
+            [options]="barChartOptions"
+            [legend]="barChartLegend"
+            [chartType]="barChartType"
+            (chartHover)="chartHovered($event)"
+            (chartClick)="chartClicked($event)">
+
+    </canvas>
+  </div>
+  <!--<button (click)="randomize()">Update</button>-->
+</div>
+<div class="col-xs-4" style="display: block">
+  <canvas baseChart
+          [datasets]="lineChartData"
+          [labels]="lineChartLabels"
+          [options]="lineChartOptions"
+          [colors]="lineChartColors"
+          [legend]="lineChartLegend"
+          [chartType]="lineChartType"
+          (chartHover)="chartHovered($event)"
+          (chartClick)="chartClicked($event)">
+
+  </canvas>
+</div>
+
+
+<!--[backgroundColor]="dddd"-->
