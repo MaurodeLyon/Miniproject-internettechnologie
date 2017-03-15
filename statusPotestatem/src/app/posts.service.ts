@@ -7,7 +7,10 @@ export class PostsService {
   constructor(private http: Http) {
     console.log('PostsService Initialized...')
   }
-  getPosts() {
+  getMauroMeasurements() {
     return this.http.get('https://vestigiumserver.herokuapp.com/api/mauro_meting').map(res => res.json());
+  }
+  getArthurMeasurements() {
+    return this.http.get('https://vestigiumserver.herokuapp.com/api/arthur_meting').map(res => res.json());
   }
 }

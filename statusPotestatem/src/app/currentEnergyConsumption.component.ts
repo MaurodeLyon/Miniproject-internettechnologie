@@ -11,7 +11,8 @@ import {data} from './Data'
 export class CurrentEnergyConsumptionComponent {
 
   title = 'show graphs!';
-  measurements: data;
+  mauroMeasurements: data;
+  arthurMeasurements: data;
   zoomedMeasurements: number[] = [0];
 
 
@@ -46,8 +47,13 @@ export class CurrentEnergyConsumptionComponent {
     {data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B'}
   ];
 
-  public lineChartLabels: Array<any> = ['0',
-    '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11'];
+  public mauroLineChartData: any;
+  public mauroLineChartLabels: Array<any>;
+
+  public arthurLineChartData: any;
+  public arthurLineChartLabels: Array<any>;
+
+
   public lineChartOptions: any = {
     responsive: true
   };
@@ -62,49 +68,70 @@ export class CurrentEnergyConsumptionComponent {
       pointHoverBackgroundColor: '#fff',
       pointHoverBorderColor: 'rgba(148,159,177,0.8)'
     }];
-  //public lineChartData:any[] = this.zoomedMeasurements;
-  public lineChartData: any = [
-    {
-      label: 'Scatter Dataset',
-      data: [{
-        x: -10,
-        y: 0
-      }, {
-        x: 0,
-        y: 10
-      }, {
-        x: 10,
-        y: 5
-      }]
-    }
-  ];
+  //public mauroLineChartData:any[] = this.zoomedMeasurements;
+
 
 
   constructor(private postsService: PostsService) {
-    this.postsService.getPosts().subscribe(posts => {
-      this.measurements = posts;
+    this.postsService.getArthurMeasurements().subscribe(posts => {
+      this.arthurMeasurements = posts;
       //console.log(this.measurements.results[0].ticks);
-      this.genLineData();
+      this.genArthurLineData();
+
+    });
+
+    this.postsService.getMauroMeasurements().subscribe(posts => {
+      this.mauroMeasurements = posts;
+      //console.log(this.measurements.results[0].ticks);
+      this.genMauroLineData();
 
     });
   }
 
-  public genLineData(): void {
+  public genArthurLineData():void{
+    this.arthurLineChartData= [
+      {
+        label: 'Scatter Dataset',
+        data: []
+      }
+    ];
+    this.arthurLineChartLabels= [];
+
+    if (this.arthurMeasurements != null) {
+      var length = this.arthurMeasurements.results.length;
+      for (var i = 13; i > 1; i--) {
+
+        this.arthurLineChartData[0].data.push(this.arthurMeasurements.results[length-i].ticks);
+        this.arthurLineChartLabels.push(this.arthurMeasurements.results[length-i].hour);
+        console.log(this.arthurLineChartData[0].data[i]);
+      }
+
+      //console.log(this.mauroLineChartData[0].data[0]);
+    }
+
+  }
+
+  public genMauroLineData(): void {
     //console.log(this.measurements.length);
-    //this.lineChartData[0].data.clear();
+    //this.mauroLineChartData[0].data.clear();
+    this.mauroLineChartData= [
+      {
+        label: 'Scatter Dataset',
+        data: []
+      }
+    ];
+    this.mauroLineChartLabels= [];
 
-    if (this.measurements != null) {
-      var length = this.measurements.results.length;
-      for (var i = 1; i < 12; i++) {
+    if (this.mauroMeasurements != null) {
+      var length = this.mauroMeasurements.results.length;
+      for (var i = 13; i > 1; i--) {
 
-        this.lineChartData[0].data.push(this.measurements.results[length - i].ticks);
-        console.log(this.lineChartData[0].data[i]);
+        this.mauroLineChartData[0].data.push(this.mauroMeasurements.results[length-i].ticks);
+        this.mauroLineChartLabels.push(this.mauroMeasurements.results[length-i].hour);
+        console.log(this.mauroLineChartData[0].data[i]);
       }
 
-      for (var i = 0; i < this.zoomedMeasurements.length; i++) {
-        //console.log(this.zoomedMeasurements[i]);
-      }
-      //console.log(this.lineChartData[0].data[0]);
+      //console.log(this.mauroLineChartData[0].data[0]);
     }
   }
 }
