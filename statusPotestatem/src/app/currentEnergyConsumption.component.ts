@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import  {PostsService} from './posts.service';
 import {data} from './Data'
 
@@ -6,8 +6,10 @@ import {data} from './Data'
   selector: 'currentEnergyConsumption',
   templateUrl: 'currentEnergyConsumption.component.html',
   providers: [PostsService]
+
 })
 export class CurrentEnergyConsumptionComponent {
+
   title = 'show graphs!';
   measurements: data;
   zoomedMeasurements: number[] = [0];
@@ -83,14 +85,18 @@ export class CurrentEnergyConsumptionComponent {
       this.measurements = posts;
       //console.log(this.measurements.results[0].ticks);
       this.genLineData();
+
     });
   }
 
   public genLineData(): void {
     //console.log(this.measurements.length);
+    //this.lineChartData[0].data.clear();
+
     if (this.measurements != null) {
       var length = this.measurements.results.length;
       for (var i = 1; i < 12; i++) {
+
         this.lineChartData[0].data.push(this.measurements.results[length - i].ticks);
         console.log(this.lineChartData[0].data[i]);
       }
