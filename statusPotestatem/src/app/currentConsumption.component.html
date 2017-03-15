@@ -1,21 +1,4 @@
-<script src="node_modules/chart.js/src/chart.js"></script>
-<h1>Current Energy Consumption</h1>
-<!--<div class="col-xs-6">-->
-  <!--<div style="display: block">-->
-    <!--<h3>Test graph: Test</h3>-->
-    <!--<canvas baseChart-->
-            <!--[datasets]="barChartData"-->
-            <!--[labels]="barChartLabels"-->
-            <!--[options]="barChartOptions"-->
-            <!--[legend]="barChartLegend"-->
-            <!--[chartType]="barChartType"-->
-            <!--(chartHover)="chartHovered($event)"-->
-            <!--(chartClick)="chartClicked($event)">-->
-
-    <!--</canvas>-->
-  <!--</div>-->
-  <!--&lt;!&ndash;<button (click)="randomize()">Update</button>&ndash;&gt;-->
-<!--</div>-->
+<h1>Current Consumption</h1>
 <div class="col-xs-6" style="display: block" *ngIf="arthurLineChartData" >
   <h3>Last 12 hours : Arthur</h3>
   <canvas baseChart
@@ -46,5 +29,3 @@
   </canvas>
 </div>
 
-
-<!--[backgroundColor]="dddd"-->

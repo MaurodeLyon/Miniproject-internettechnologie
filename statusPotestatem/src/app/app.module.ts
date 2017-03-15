@@ -7,11 +7,12 @@ import { ChartsModule } from 'ng2-charts';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home.component';
-import { CurrentEnergyConsumptionComponent } from './currentEnergyConsumption.component';
+import { CurrentRawValuesComponent } from './currentRawValues.component';
+import { CurrentConsumptionComponent } from './currentConsumption.component';
 
 @NgModule({
   declarations: [
-    AppComponent,HomeComponent,CurrentEnergyConsumptionComponent
+    AppComponent,HomeComponent,CurrentRawValuesComponent, CurrentConsumptionComponent
   ],
   imports: [BrowserModule, FormsModule, HttpModule, routing, ChartsModule],
   providers: [],

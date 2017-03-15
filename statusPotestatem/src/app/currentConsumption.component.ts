@@ -4,48 +4,14 @@ import {data} from './Data'
 
 @Component({
   selector: 'currentEnergyConsumption',
-  templateUrl: 'currentEnergyConsumption.component.html',
+  templateUrl: 'currentConsumption.component.html',
   providers: [PostsService]
 
 })
-export class CurrentEnergyConsumptionComponent {
+export class CurrentConsumptionComponent {
 
-  title = 'show graphs!';
   mauroMeasurements: data;
   arthurMeasurements: data;
-  zoomedMeasurements: number[] = [0];
-
-
-  public barChartOptions: any = {
-    scaleShowVerticalLines: false,
-    responsive: true
-  };
-  public barChartLabels: string[] = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
-  public barChartType: string = 'bar';
-  public barChartLegend: boolean = true;
-
-  // public lineChartColors:Array<any> = [
-  //   { // grey
-  //     backgroundColor: 'rgba(148,159,177,0.2)',
-  //     borderColor: 'rgba(148,159,177,1)',
-  //     pointBackgroundColor: 'rgba(148,159,177,1)',
-  //     pointBorderColor: '#fff',
-  //     pointHoverBackgroundColor: '#fff',
-  //     pointHoverBorderColor: 'rgba(148,159,177,0.8)'
-  //   },
-  //   { // dark grey
-  //     backgroundColor: 'rgba(77,83,96,0.2)',
-  //     borderColor: 'rgba(77,83,96,1)',
-  //     pointBackgroundColor: 'rgba(77,83,96,1)',
-  //     pointBorderColor: '#fff',
-  //     pointHoverBackgroundColor: '#fff',
-  //     pointHoverBorderColor: 'rgba(77,83,96,1)'
-  //   }]
-
-  public barChartData: any[] = [
-    {data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A'},
-    {data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B'}
-  ];
 
   public mauroLineChartData: any;
   public mauroLineChartLabels: Array<any>;
@@ -72,6 +38,7 @@ export class CurrentEnergyConsumptionComponent {
 
 
 
+
   constructor(private postsService: PostsService) {
     this.postsService.getArthurMeasurements().subscribe(posts => {
       this.arthurMeasurements = posts;
@@ -86,9 +53,14 @@ export class CurrentEnergyConsumptionComponent {
       this.genMauroLineData();
 
     });
-  }
 
-  public genArthurLineData():void{
+
+
+
+
+  }
+  public genArthurLineData():void
+  {
     this.arthurLineChartData= [
       {
         label: 'Scatter Dataset',
@@ -99,19 +71,21 @@ export class CurrentEnergyConsumptionComponent {
 
     if (this.arthurMeasurements != null) {
       var length = this.arthurMeasurements.results.length;
-      for (var i = 13; i > 1; i--) {
-
-        this.arthurLineChartData[0].data.push(this.arthurMeasurements.results[length-i].ticks);
+      for (var i = 24; i > 1; i--) {
+        let val = this.arthurMeasurements.results[length-i].ticks;
+        val= val/187.5;
+        val=val*1000;
+        this.arthurLineChartData[0].data.push(val);
         this.arthurLineChartLabels.push(this.arthurMeasurements.results[length-i].hour);
         console.log(this.arthurLineChartData[0].data[i]);
       }
 
       //console.log(this.mauroLineChartData[0].data[0]);
     }
-
   }
 
-  public genMauroLineData(): void {
+  public genMauroLineData():void
+  {
     //console.log(this.measurements.length);
     //this.mauroLineChartData[0].data.clear();
     this.mauroLineChartData= [
@@ -124,8 +98,7 @@ export class CurrentEnergyConsumptionComponent {
 
     if (this.mauroMeasurements != null) {
       var length = this.mauroMeasurements.results.length;
-      for (var i = 13; i > 1; i--) {
-
+      for (var i = 24; i > 1; i--) {
         this.mauroLineChartData[0].data.push(this.mauroMeasurements.results[length-i].ticks);
         this.mauroLineChartLabels.push(this.mauroMeasurements.results[length-i].hour);
         console.log(this.mauroLineChartData[0].data[i]);
