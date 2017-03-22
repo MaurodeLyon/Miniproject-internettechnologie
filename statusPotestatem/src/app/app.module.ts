@@ -6,13 +6,12 @@ import { routing } from './app.routing';
 import { ChartsModule } from 'ng2-charts';
 
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home.component';
-import { CurrentRawValuesComponent } from './currentRawValues.component';
-import { CurrentConsumptionComponent } from './currentConsumption.component';
+import { CurrentRawValuesComponent } from './currentRawValues/currentRawValues.component';
+import { CurrentConsumptionComponent } from './currentConsumption/currentConsumption.component';
 
 @NgModule({
   declarations: [
-    AppComponent,HomeComponent,CurrentRawValuesComponent, CurrentConsumptionComponent
+    AppComponent,CurrentRawValuesComponent, CurrentConsumptionComponent
   ],
   imports: [BrowserModule, FormsModule, HttpModule, routing, ChartsModule],
   providers: [],

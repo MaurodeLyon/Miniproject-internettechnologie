@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
-import  {PostsService} from './posts.service';
-import {data} from './Data'
+import  {PostsService} from '../services/posts.service';
+import {data} from '../services/Data'
 
 @Component({
   selector: 'currentEnergyConsumption',
@@ -37,8 +37,6 @@ export class CurrentConsumptionComponent {
   //public mauroLineChartData:any[] = this.zoomedMeasurements;
 
 
-
-
   constructor(private postsService: PostsService) {
     this.postsService.getArthurMeasurements().subscribe(posts => {
       this.arthurMeasurements = posts;
@@ -55,28 +53,25 @@ export class CurrentConsumptionComponent {
     });
 
 
-
-
-
   }
-  public genArthurLineData():void
-  {
-    this.arthurLineChartData= [
+
+  public genArthurLineData(): void {
+    this.arthurLineChartData = [
       {
         label: 'Scatter Dataset',
         data: []
       }
     ];
-    this.arthurLineChartLabels= [];
+    this.arthurLineChartLabels = [];
 
     if (this.arthurMeasurements != null) {
       var length = this.arthurMeasurements.results.length;
       for (var i = 24; i > 1; i--) {
-        let val = this.arthurMeasurements.results[length-i].ticks;
-        val= val/187.5;
-        val=val*1000;
+        let val = this.arthurMeasurements.results[length - i].ticks;
+        val = val / 187.5;
+        val = val * 1000;
         this.arthurLineChartData[0].data.push(val);
-        this.arthurLineChartLabels.push(this.arthurMeasurements.results[length-i].hour);
+        this.arthurLineChartLabels.push(this.arthurMeasurements.results[length - i].hour);
         console.log(this.arthurLineChartData[0].data[i]);
       }
 
@@ -84,23 +79,22 @@ export class CurrentConsumptionComponent {
     }
   }
 
-  public genMauroLineData():void
-  {
+  public genMauroLineData(): void {
     //console.log(this.measurements.length);
     //this.mauroLineChartData[0].data.clear();
-    this.mauroLineChartData= [
+    this.mauroLineChartData = [
       {
         label: 'Scatter Dataset',
         data: []
       }
     ];
-    this.mauroLineChartLabels= [];
+    this.mauroLineChartLabels = [];
 
     if (this.mauroMeasurements != null) {
       var length = this.mauroMeasurements.results.length;
       for (var i = 24; i > 1; i--) {
-        this.mauroLineChartData[0].data.push(this.mauroMeasurements.results[length-i].ticks);
-        this.mauroLineChartLabels.push(this.mauroMeasurements.results[length-i].hour);
+        this.mauroLineChartData[0].data.push(this.mauroMeasurements.results[length - i].ticks);
+        this.mauroLineChartLabels.push(this.mauroMeasurements.results[length - i].hour);
         console.log(this.mauroLineChartData[0].data[i]);
       }
 

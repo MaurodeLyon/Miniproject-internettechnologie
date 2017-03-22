@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
-import  {PostsService} from './posts.service';
-import {data} from './Data'
+import  {PostsService} from '../services/posts.service';
+import {data} from '../services/Data'
 
 @Component({
   selector: 'currentRawValues',

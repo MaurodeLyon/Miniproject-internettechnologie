@@ -15,6 +15,5 @@ export interface results{
   day: number;
   month: number;
   year: number
-
 }
 

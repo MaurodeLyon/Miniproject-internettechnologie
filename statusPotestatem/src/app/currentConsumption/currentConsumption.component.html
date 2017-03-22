@@ -1,5 +1,5 @@
 <h1>Current Consumption</h1>
-<div class="col-xs-6" style="display: block" *ngIf="arthurLineChartData" >
+<div class="col-xs-6" style="display: block" *ngIf="arthurLineChartData">
   <h3>Last 12 hours : Arthur</h3>
   <canvas baseChart
           [datasets]="arthurLineChartData"
@@ -14,7 +14,7 @@
   </canvas>
 </div>
 
-<div class="col-xs-6" style="display: block" *ngIf="mauroLineChartData" >
+<div class="col-xs-6" style="display: block" *ngIf="mauroLineChartData">
   <h3>Last 12 hours : Mauro</h3>
   <canvas baseChart
           [datasets]="mauroLineChartData"
