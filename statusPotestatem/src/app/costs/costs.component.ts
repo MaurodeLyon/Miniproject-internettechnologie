@@ -1,6 +1,5 @@
 import {Component} from '@angular/core';
 import {PostsService} from "../services/posts.service";
-import {data} from "../services/Data";
 import {BarChart} from "../charts/BarChart";
 
 @Component({
@@ -10,29 +9,57 @@ import {BarChart} from "../charts/BarChart";
 })
 
 export class costsComponent {
-  mauroData: data;
-  mauroBarChart: mauroBarChart;
+  mauroBarChart: MauroBarChart;
+  arthurBarChart: MauroBarChart;
 
   constructor(private postsService: PostsService) {
     this.postsService.getMauroMeasurements().subscribe(posts => {
-      this.mauroData = posts;
-      this.mauroBarChart = new mauroBarChart();
-      console.log(this.mauroData);
-      let prijs = [];
-      let uur = [];
-      for (let i = 0; i < this.mauroData.results.length; i++) {
-        prijs.push(this.mauroData.results[i].ticks * 0.00023);
-        uur.push(this.mauroData.results[i].hour);
+      this.mauroBarChart = new MauroBarChart();
+      let price = [];
+      let date = [];
+      let ticksPerDay = 0;
+      let prevDay = posts.results[0].day;
+      for (let i = 0; i < posts.results.length; i++) {
+        let currentDay = posts.results[i].day;
+        if (currentDay == prevDay) {
+          ticksPerDay += posts.results[i].ticks;
+        }
+        else {
+          price.push(ticksPerDay * 0.00023);
+          date.push(posts.results[i].day + "-" + posts.results[i].month);
+          ticksPerDay = 0;
+        }
+        prevDay = currentDay;
       }
-      console.log(prijs);
-      this.mauroBarChart.barChartData[0].data = prijs;
-      this.mauroBarChart.barChartLabels = uur;
+      this.mauroBarChart.barChartData[0].data = price;
+      this.mauroBarChart.barChartLabels = date;
+    });
+
+    this.postsService.getArthurMeasurements().subscribe(posts => {
+      this.arthurBarChart = new ArthurBarChart();
+      let price = [];
+      let date = [];
+      let ticksPerDay = 0;
+      let prevDay = posts.results[0].day;
+      for (let i = 0; i < posts.results.length; i++) {
+        let currentDay = posts.results[i].day;
+        if (currentDay == prevDay) {
+          ticksPerDay += posts.results[i].ticks;
+        }
+        else {
+          price.push(ticksPerDay * 0.00023);
+          date.push(posts.results[i].day + "-" + posts.results[i].month);
+          ticksPerDay = 0;
+        }
+        prevDay = currentDay;
+      }
+      this.arthurBarChart.barChartData[0].data = price;
+      this.arthurBarChart.barChartLabels = date;
     });
   }
 }
 
-
-class mauroBarChart implements BarChart {
+class ArthurBarChart implements BarChart {
   barChartOptions: any = {
     scaleShowVerticalLines: false,
     responsive: true
@@ -40,9 +67,25 @@ class mauroBarChart implements BarChart {
   barChartLabels: string[];
   barChartType: string = 'bar';
   barChartLegend: boolean = true;
-  barChartData: any[] = [
-    {data: [], label: '€'}
-  ];
+  barChartData: any[] = [{data: [], label: '€'}];
+
+  chartClicked(e: any): void {
+  }
+
+  chartHovered(e: any): void {
+  }
+
+}
+
+class MauroBarChart implements BarChart {
+  barChartOptions: any = {
+    scaleShowVerticalLines: false,
+    responsive: true
+  };
+  barChartLabels: string[];
+  barChartType: string = 'bar';
+  barChartLegend: boolean = true;
+  barChartData: any[] = [{data: [], label: '€'}];
 
   chartClicked(e: any): void {
   }
