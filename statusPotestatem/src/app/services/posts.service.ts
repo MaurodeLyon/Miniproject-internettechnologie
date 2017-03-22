@@ -13,4 +13,7 @@ export class PostsService {
   getArthurMeasurements() {
     return this.http.get('https://vestigiumserver.herokuapp.com/api/arthur_meting').map(res => res.json());
   }
+  getMauroDelta(){
+    return this.http.get('https://vestigiumserver.herokuapp.com/api/previous_measurements/delta/Mauro').map(res => res.json());
+  }
 }
