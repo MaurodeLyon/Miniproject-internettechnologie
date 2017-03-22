@@ -1,6 +1,15 @@
 <h1>Current Consumption</h1>
-<div *ngIf="currentTime">
+<div class="col-xs-6" *ngIf="currentTime">
   <label>previous time:</label> {{currentTime}} <br/>
-  <label>current time:</label> {{previousTime}}
+  <label>current time:</label> {{previousTime}} <br/>
+  <label>1 Wh per {{deltaTime}} seconden</label><br/>
+  <label>Predicted usage:</label> {{currentUsage}} Wh
 </div>
-
+<div class="col-xs-6" style="display: block" *ngIf="MauroPieChart">
+  <canvas baseChart
+          [data]="MauroPieChart.pieChartData"
+          [labels]="MauroPieChart.pieChartLabels"
+          [chartType]="MauroPieChart.pieChartType"
+          (chartHover)="MauroPieChart.chartHovered($event)"
+          (chartClick)="MauroPieChart.chartClicked($event)"></canvas>
+</div>
