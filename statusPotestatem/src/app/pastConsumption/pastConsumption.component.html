@@ -1,46 +1,14 @@
 <h1>Past Consumption</h1>
-<!--<div class="col-xs-6" style="display: block" *ngIf="lineChartLabels12|| lineChartLabels12">-->
-  <!--<h3>Last 12 hours</h3>-->
-  <!--<canvas baseChart-->
-          <!--[datasets]="lineChartData12"-->
-          <!--[labels]="lineChartLabels12"-->
-          <!--[options]="lineChartOptions"-->
-          <!--[colors]="lineChartColors"-->
-          <!--[legend]="lineChartLegend"-->
-          <!--[chartType]="lineChartType"-->
-          <!--(chartHover)="chartHovered($event)"-->
-          <!--(chartClick)="chartClicked($event)">-->
-
-  <!--</canvas>-->
-<!--</div>-->
-<div class="col-xs-6" style="display: block" *ngIf="arthurLineChartData||arthurLineChartLabels">
+<div class="col-xs-6" style="display: block" *ngIf="MauroLineChart12Hour">
   <h3>Arthur</h3>
   <canvas baseChart
-          [datasets]="arthurLineChartData"
-          [labels]="arthurLineChartLabels"
-          [options]="lineChartOptions"
-          [colors]="lineChartColors"
-          [legend]="lineChartLegend"
-          [chartType]="lineChartType"
-          (chartHover)="chartHovered($event)"
-          (chartClick)="chartClicked($event)">
-
+          [datasets]="MauroLineChart12Hour.lineChartData"
+          [labels]="MauroLineChart12Hour.lineChartLabels"
+          [options]="MauroLineChart12Hour.lineChartOptions"
+          [colors]="MauroLineChart12Hour.lineChartColors"
+          [legend]="MauroLineChart12Hour.lineChartLegend"
+          [chartType]="MauroLineChart12Hour.lineChartType"
+          (chartHover)="MauroLineChart12Hour.chartHovered($event)"
+          (chartClick)="MauroLineChart12Hour.chartClicked($event)">
   </canvas>
 </div>
-
-<div class="col-xs-6" style="display: block" *ngIf="mauroLineChartLabels">
-  <h3>Mauro</h3>
-  <canvas baseChart
-          [datasets]="mauroLineChartData"
-          [labels]="mauroLineChartLabels"
-          [options]="lineChartOptions"
-          [colors]="lineChartColors"
-          [legend]="lineChartLegend"
-          [chartType]="lineChartType"
-          (chartHover)="chartHovered($event)"
-          (chartClick)="chartClicked($event)">
-
-  </canvas>
-</div>
-
-
