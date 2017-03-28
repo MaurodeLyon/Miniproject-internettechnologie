@@ -25,7 +25,7 @@ const appRoutes: Routes = [
     component: pastConsumptionComponent
   },
   {
-    path: 'trend',
+    path: 'prediction',
     component: trendComponent
   }
 ]

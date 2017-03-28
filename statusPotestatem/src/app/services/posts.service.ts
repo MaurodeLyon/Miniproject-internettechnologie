@@ -16,4 +16,7 @@ export class PostsService {
   getMauroDelta(){
     return this.http.get('https://vestigiumserver.herokuapp.com/api/previous_measurements/delta/Mauro').map(res => res.json());
   }
+  getArthurDelta(){
+    return this.http.get('https://vestigiumserver.herokuapp.com/api/previous_measurements/delta/Arthur').map(res => res.json());
+  }
 }

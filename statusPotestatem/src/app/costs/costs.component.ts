@@ -44,7 +44,7 @@ export class costsComponent {
       for (let i = 0; i < posts.results.length; i++) {
         let currentDay = posts.results[i].day;
         if (currentDay == prevDay) {
-          ticksPerDay += posts.results[i].ticks;
+          ticksPerDay += (posts.results[i].ticks  / 187.5)*1000;
         }
         else {
           price.push(ticksPerDay * 0.00023);
