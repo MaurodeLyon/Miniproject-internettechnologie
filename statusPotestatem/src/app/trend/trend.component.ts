@@ -5,7 +5,8 @@ import {LineChart} from "../charts/LineChart";
 
 @Component({
   selector: 'app-root',
-  templateUrl: './trend.component.html'
+  templateUrl: './trend.component.html',
+  providers: [PostsService]
 })
 export class trendComponent {
   mauroMeasurements: data;
@@ -17,9 +18,13 @@ export class trendComponent {
   constructor(private postsService: PostsService) {
     this.postsService.getMauroMeasurements().subscribe(posts => {
       this.mauroMeasurements=posts;
+      this.mauroTrend = new TrendLineChart(false);
+      this.mauroTrend.genListData(posts);
     });
     this.postsService.getArthurMeasurements().subscribe(posts => {
       this.arthurMeasurements=posts;
+      this.arthurTrend = new TrendLineChart(true);
+      this.arthurTrend.genListData(posts);
     });
 
   }
@@ -48,22 +53,47 @@ class TrendLineChart implements LineChart {
   }
   public genListData(values:data):void {
     if (values != null) {
-      var length = values.results.length;
-      var currentDay=values.results[length-1].day;
+       var length = values.results.length;
+      var currentHour=values.results[length-1].hour;
 
-      for (var i = 24; i > 1; i--) {
-        if(this.dialMeter)
+      for(var i = 24; i > 1;i--)
+      {
+        //console.log(i);
+        var total=0;
+        var average=0;
+        var times=5;
+        for(var j = 0; j < times; j++ )
         {
-          let val = values.results[length - i].ticks;
-          val = val / 187.5;
-          val = val * 1000;
-          this.lineChartData[0].data.push(val);
+            total+=values.results[length - 1 - i - (j*24)].ticks;
         }
-        else{
-          this.lineChartData[0].data.push(values.results[length - i].ticks);
-        }
-        this.lineChartLabels.push(values.results[length - i].hour);
+
+        average = total /times;
+        this.lineChartData[0].data.push(average);
+        console.log((values.results[length - 1].hour+(24-i))%24 +1);
+        this.lineChartLabels.push((values.results[length - 1].hour+(24-i))%24+1);
+
+        total=0;
+        average=0;
+
       }
+
+
+      // var length = values.results.length;
+      // var currentDay=values.results[length-1].day;
+      //
+      // for (var i = 24; i > 1; i--) {
+      //   if(this.dialMeter)
+      //   {
+      //     let val = values.results[length - i].ticks;
+      //     val = val / 187.5;
+      //     val = val * 1000;
+      //     this.lineChartData[0].data.push(val);
+      //   }
+      //   else{
+      //     this.lineChartData[0].data.push(values.results[length - i].ticks);
+      //   }
+      //   this.lineChartLabels.push(values.results[length - i].hour);
+      // }
     }
   }
   chartClicked(e: any): void {
