@@ -10,7 +10,7 @@ import {BarChart} from "../charts/BarChart";
 
 export class costsComponent {
   mauroBarChart: MauroBarChart;
-  arthurBarChart: MauroBarChart;
+  arthurBarChart: ArthurBarChart;
 
   constructor(private postsService: PostsService) {
     this.postsService.getMauroMeasurements().subscribe(posts => {
@@ -44,7 +44,7 @@ export class costsComponent {
       for (let i = 0; i < posts.results.length; i++) {
         let currentDay = posts.results[i].day;
         if (currentDay == prevDay) {
-          ticksPerDay += (posts.results[i].ticks  / 187.5)*1000;
+          ticksPerDay += (posts.results[i].ticks / 187.5) * 1000;
         }
         else {
           price.push(ticksPerDay * 0.00023);
@@ -74,7 +74,6 @@ class ArthurBarChart implements BarChart {
 
   chartHovered(e: any): void {
   }
-
 }
 
 class MauroBarChart implements BarChart {

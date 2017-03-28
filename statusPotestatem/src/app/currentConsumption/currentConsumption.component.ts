@@ -1,7 +1,6 @@
 import {Component} from '@angular/core';
 import  {PostsService} from '../services/posts.service';
 import {PieChart} from "../charts/PieChart";
-import {data} from "../services/Data";
 
 @Component({
   selector: 'currentEnergyConsumption',
