@@ -18,12 +18,12 @@ export class trendComponent {
   constructor(private postsService: PostsService) {
     this.postsService.getMauroMeasurements().subscribe(posts => {
       this.mauroMeasurements=posts;
-      this.mauroTrend = new TrendLineChart(false);
+      this.mauroTrend = new TrendLineChart(false,5);
       this.mauroTrend.genListData(posts);
     });
     this.postsService.getArthurMeasurements().subscribe(posts => {
       this.arthurMeasurements=posts;
-      this.arthurTrend = new TrendLineChart(true);
+      this.arthurTrend = new TrendLineChart(true,5);
       this.arthurTrend.genListData(posts);
     });
 
@@ -46,30 +46,52 @@ class TrendLineChart implements LineChart {
       pointHoverBackgroundColor: '#fff',
       pointHoverBorderColor: 'rgba(148,159,177,0.8)'
     }];
+
   dialMeter:boolean=false;
-  constructor(dialMeter:boolean)
+  times:number=0;
+
+  constructor(dialMeter:boolean,times:number)
   {
     this.dialMeter=dialMeter;
+    this.times=times;
   }
   public genListData(values:data):void {
     if (values != null) {
        var length = values.results.length;
       var currentHour=values.results[length-1].hour;
 
-      for(var i = 24; i > 1;i--)
+      for(var i = 24; i > 0;i--)
       {
         //console.log(i);
         var total=0;
         var average=0;
-        var times=5;
-        for(var j = 0; j < times; j++ )
+        //var times=5;
+        for(var j = 0; j < this.times; j++ )
         {
-            total+=values.results[length - 1 - i - (j*24)].ticks;
+            if(this.dialMeter)
+            {
+              let val = values.results[length - 1 - i - (j*24)].ticks;
+                   val = val / 187.5;
+                   val = val * 1000;
+              total+=val;
+            }
+            else {
+              total+=values.results[length - 1 - i - (j*24)].ticks;
+            }
+
+
+
+
+            // if(((values.results[length - 1].hour+(24-i))%24 )==14)
+            // {
+            //   //console.log(total);
+            //   console.log(values.results[length - 1 - i - (j*24)].ticks);
+            // }
         }
 
-        average = total /times;
+        average = total /this.times;
         this.lineChartData[0].data.push(average);
-        console.log((values.results[length - 1].hour+(24-i))%24 +1);
+        //console.log((values.results[length - 1].hour+(24-i))%24 +1);
         this.lineChartLabels.push((values.results[length - 1].hour+(24-i))%24+1);
 
         total=0;
