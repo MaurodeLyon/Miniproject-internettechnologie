@@ -1,36 +1,39 @@
 <h1>Current Consumption</h1>
-<div>
-  <h2>Mauro:</h2>
-<div class="col-xs-6" *ngIf="currentTime">
-  <label>previous time:</label> {{currentTime}} <br/>
-  <label>current time:</label> {{previousTime}} <br/>
-  <label>1 Wh per {{deltaTime}} seconden</label><br/>
-  <label>Predicted usage:</label> {{currentUsage}} Wh
-</div>
-<div class="col-xs-6" style="display: block" *ngIf="mauroPieChart">
-  <canvas baseChart
-          [data]="mauroPieChart.pieChartData"
-          [labels]="mauroPieChart.pieChartLabels"
-          [chartType]="mauroPieChart.pieChartType"
-          (chartHover)="mauroPieChart.chartHovered($event)"
-          (chartClick)="mauroPieChart.chartClicked($event)"></canvas>
-</div>
-</div>
-<div>
-  <h2>Arthur:</h2>
-  <div class="col-xs-6" *ngIf="currentTime">
-    <label>previous time:</label> {{currentTime}} <br/>
-    <label>current time:</label> {{previousTime}} <br/>
-    <label>1 Wh per {{deltaTime}} seconden</label><br/>
-    <label>Predicted usage:</label> {{currentUsage}} Wh
-  </div>
-  <div class="col-xs-6" style="display: block" *ngIf="arthurPieChart">
-    <canvas baseChart
-            [data]="arthurPieChart.pieChartData"
-            [labels]="arthurPieChart.pieChartLabels"
-            [chartType]="arthurPieChart.pieChartType"
-            (chartHover)="arthurPieChart.chartHovered($event)"
-            (chartClick)="arthurPieChart.chartClicked($event)"></canvas>
-  </div>
-</div>
 
+<div class="col-xs-12">
+  <div class="col-xs-6">
+    <div class="col-xs-12">
+      <h3>Mauro</h3>
+    </div>
+    <div class="col-xs-12" *ngIf="mauroCurrentTime">
+      <label>1 Wh per {{mauroDeltaTime}} seconden</label><br/>
+      <label>Predicted usage:</label> {{mauroCurrentUsage}} Wh
+    </div>
+    <div class="col-xs-12" style="display: block" *ngIf="mauroPieChart">
+      <canvas baseChart
+              [data]="mauroPieChart.pieChartData"
+              [labels]="mauroPieChart.pieChartLabels"
+              [chartType]="mauroPieChart.pieChartType"
+              (chartHover)="mauroPieChart.chartHovered($event)"
+              (chartClick)="mauroPieChart.chartClicked($event)"></canvas>
+    </div>
+  </div>
+  <div class="col-xs-6">
+    <div class="col-xs-12">
+      <h3>Arthur</h3>
+    </div>
+    <div class="col-xs-12" *ngIf="arthurCurrentTime">
+      <label>Arthur:</label><br/>
+      <label>1 Wh per {{arthurDeltaTime}} seconden</label><br/>
+      <label>Predicted usage:</label> {{arthurCurrentUsage}} Wh
+    </div>
+    <div class="col-xs-12" style="display: block" *ngIf="arthurPieChart">
+      <canvas baseChart
+              [data]="arthurPieChart.pieChartData"
+              [labels]="arthurPieChart.pieChartLabels"
+              [chartType]="arthurPieChart.pieChartType"
+              (chartHover)="arthurPieChart.chartHovered($event)"
+              (chartClick)="arthurPieChart.chartClicked($event)"></canvas>
+    </div>
+  </div>
+</div>

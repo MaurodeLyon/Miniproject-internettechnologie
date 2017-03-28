@@ -10,44 +10,53 @@ import {data} from "../services/Data";
 
 })
 export class CurrentConsumptionComponent {
-  previousTime: number;
-  currentTime: number;
-  deltaTime: number;
-  currentUsage: number;
   mauroPieChart: UsagePieChart;
+  mauroPreviousTime: number;
+  mauroCurrentTime: number;
+  mauroDeltaTime: number;
+  mauroCurrentUsage: number;
+
   arthurPieChart: UsagePieChart;
+  arthurPreviousTime: number;
+  arthurCurrentTime: number;
+  arthurDeltaTime: number;
+  arthurCurrentUsage: number;
 
   constructor(private postsService: PostsService) {
     this.postsService.getMauroDelta().subscribe(posts => {
       this.mauroPieChart = new UsagePieChart();
-      this.setupUsageChart(posts,this.mauroPieChart);
+      let prevTimeArr = posts[0].current_tick.split("T")[1].split(".")[0].split(":");
+      let currTimeArr = posts[0].previous_tick.split("T")[1].split(".")[0].split(":");
 
+      this.mauroPreviousTime = +(prevTimeArr[0] * 60 * 60) + +(prevTimeArr[1] * 60) + +(prevTimeArr[2]);
+      this.mauroCurrentTime = +(currTimeArr[0] * 60 * 60) + +(currTimeArr[1] * 60) + +(currTimeArr[2]);
+
+      this.mauroDeltaTime = this.mauroPreviousTime - this.mauroCurrentTime;
+      this.mauroCurrentUsage = Math.floor(3600 / this.mauroDeltaTime);
+
+      let scale = 3600 - +this.mauroCurrentUsage;
+      this.mauroPieChart.pieChartData = [this.mauroCurrentUsage, scale];
     });
+
     this.postsService.getArthurDelta().subscribe(posts => {
       this.arthurPieChart = new UsagePieChart();
-      this.setupUsageChart(posts,this.arthurPieChart);
+      let prevTimeArr = posts[0].current_tick.split("T")[1].split(".")[0].split(":");
+      let currTimeArr = posts[0].previous_tick.split("T")[1].split(".")[0].split(":");
 
+      this.arthurPreviousTime = +(prevTimeArr[0] * 60 * 60) + +(prevTimeArr[1] * 60) + +(prevTimeArr[2]);
+      this.arthurCurrentTime = +(currTimeArr[0] * 60 * 60) + +(currTimeArr[1] * 60) + +(currTimeArr[2]);
+
+      this.arthurDeltaTime = this.arthurPreviousTime - this.arthurCurrentTime;
+      this.arthurCurrentUsage = Math.floor(3600 / this.arthurDeltaTime);
+
+      let scale = 3600 - +this.arthurCurrentUsage;
+      this.arthurPieChart.pieChartData = [this.arthurCurrentUsage, scale];
     });
   }
-  private setupUsageChart(posts:data,chart:UsagePieChart)
-  {
-    let prevTimeArr = posts[0].current_tick.split("T")[1].split(".")[0].split(":");
-    let currTimeArr = posts[0].previous_tick.split("T")[1].split(".")[0].split(":");
-
-    this.previousTime = +(prevTimeArr[0] * 60 * 60) + +(prevTimeArr[1] * 60) + +(prevTimeArr[2]);
-    this.currentTime = +(currTimeArr[0] * 60 * 60) + +(currTimeArr[1] * 60) + +(currTimeArr[2]);
-
-    this.deltaTime = this.previousTime - this.currentTime;
-    this.currentUsage = 3600 / this.deltaTime;
-
-    let scale = 3600 - +this.currentUsage;
-    chart.pieChartData = [this.currentUsage,scale];
-  }
-
 }
 
 class UsagePieChart implements PieChart {
-  pieChartLabels: string[] = ["Usage",""];
+  pieChartLabels: string[] = ["Usage", ""];
   pieChartData: number[];
   pieChartType: string = 'pie';
 
