@@ -1,6 +1,6 @@
 <h1>Trend</h1>
 <div class="col-xs-6" style="display: block" *ngIf="mauroTrend">
-  <h3>Mauro: Trend</h3>
+  <h3>Mauro: 24 hour prediction</h3>
   <canvas baseChart
           [datasets]="mauroTrend.lineChartData"
           [labels]="mauroTrend.lineChartLabels"
@@ -13,7 +13,7 @@
   </canvas>
 </div>
 <div class="col-xs-6" style="display: block" *ngIf="arthurTrend">
-  <h3>Arthur: Trend</h3>
+  <h3>Arthur: 24 hour prediction</h3>
   <canvas baseChart
           [datasets]="arthurTrend.lineChartData"
           [labels]="arthurTrend.lineChartLabels"
