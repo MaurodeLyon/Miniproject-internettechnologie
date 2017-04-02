@@ -28,6 +28,6 @@ const appRoutes: Routes = [
     path: 'prediction',
     component: TrendComponent
   }
-]
+];
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
