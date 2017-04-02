@@ -1,16 +1,16 @@
 import {Component} from '@angular/core';
-import  {PostsService} from '../services/posts.service';
-import {data} from '../services/Data'
-import {LineChart} from "../charts/LineChart";
+import {PostsService} from '../services/posts.service';
+import {Data} from '../services/Data';
+import {LineChart} from '../charts/LineChart';
 
 @Component({
   selector: 'app-root',
   templateUrl: './trend.component.html',
   providers: [PostsService]
 })
-export class trendComponent {
-  mauroMeasurements: data;
-  arthurMeasurements: data;
+export class TrendComponent {
+  mauroMeasurements: Data;
+  arthurMeasurements: Data;
 
   mauroTrend: TrendLineChart;
   arthurTrend: TrendLineChart;
@@ -18,7 +18,7 @@ export class trendComponent {
   constructor(private postsService: PostsService) {
     this.postsService.getMauroMeasurements().subscribe(posts => {
       this.mauroMeasurements = posts;
-      this.mauroTrend = new TrendLineChart(false, 5);
+      this.mauroTrend = new TrendLineChart(false, 4);
       this.mauroTrend.genListData(posts);
     });
     this.postsService.getArthurMeasurements().subscribe(posts => {
@@ -34,8 +34,8 @@ class TrendLineChart implements LineChart {
   public lineChartOptions: any = {
     responsive: true
   };
-  public lineChartLegend: boolean = true;
-  public lineChartType: string = 'line';
+  public lineChartLegend: any = true;
+  public lineChartType: any = 'line';
   public lineChartColors: Array<any> = [
     {
       backgroundColor: 'rgba(148,159,177,0.2)',
@@ -46,18 +46,17 @@ class TrendLineChart implements LineChart {
       pointHoverBorderColor: 'rgba(148,159,177,0.8)'
     }];
 
-  dialMeter: boolean = false;
-  times: number = 0;
+  dialMeter: any = false;
+  times: any = 0;
 
   constructor(dialMeter: boolean, times: number) {
     this.dialMeter = dialMeter;
     this.times = times;
   }
 
-  public genListData(values: data): void {
+  public genListData(values: Data): void {
     if (values != null) {
-      let length = values.results.length;
-
+      const length = values.results.length;
       for (let i = 24; i > 0; i--) {
         let total = 0;
         let average = 0;
@@ -67,8 +66,7 @@ class TrendLineChart implements LineChart {
             val = val / 187.5;
             val = val * 1000;
             total += val;
-          }
-          else {
+          } else {
             total += values.results[length - 1 - i - (j * 24)].ticks;
           }
         }

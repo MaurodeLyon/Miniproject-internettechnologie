@@ -1,17 +1,17 @@
 import {Component} from '@angular/core';
-import  {PostsService} from '../services/posts.service';
-import {data} from '../services/Data'
-import {LineChart} from "../charts/LineChart";
+import {PostsService} from '../services/posts.service';
+import {Data} from '../services/Data';
+import {LineChart} from '../charts/LineChart';
 
 @Component({
-  selector: 'pastConsumption',
+  selector: 'app-past-consumption',
   templateUrl: 'pastConsumption.component.html',
   providers: [PostsService]
 
 })
-export class pastConsumptionComponent {
-  mauroMeasurements: data;
-  arthurMeasurements: data;
+export class PastConsumptionComponent {
+  mauroMeasurements: Data;
+  arthurMeasurements: Data;
 
   mauro12: HourlyLineChart;
   mauro24: HourlyLineChart;
@@ -54,8 +54,8 @@ class HourlyLineChart implements LineChart {
   public lineChartOptions: any = {
     responsive: true
   };
-  public lineChartLegend: boolean = true;
-  public lineChartType: string = 'line';
+  public lineChartLegend: any = true;
+  public lineChartType: any = 'line';
   public lineChartColors: Array<any> = [
     {
       backgroundColor: 'rgba(148,159,177,0.2)',
@@ -65,25 +65,24 @@ class HourlyLineChart implements LineChart {
       pointHoverBackgroundColor: '#fff',
       pointHoverBorderColor: 'rgba(148,159,177,0.8)'
     }];
-  range: number = 0;
-  dialMeter: boolean = false;
+  range: any = 0;
+  dialMeter: any = false;
 
   constructor(destinedRange: number, dialMeter: boolean) {
     this.range = destinedRange;
     this.dialMeter = dialMeter;
   }
 
-  public genListData(values: data): void {
+  public genListData(values: Data): void {
     if (values != null) {
-      let length = values.results.length;
+      const length = values.results.length;
       for (let i = this.range; i > 1; i--) {
         if (this.dialMeter) {
           let val = values.results[length - i].ticks;
           val = val / 187.5;
           val = val * 1000;
           this.lineChartData[0].data.push(val);
-        }
-        else {
+        } else {
           this.lineChartData[0].data.push(values.results[length - i].ticks);
         }
 

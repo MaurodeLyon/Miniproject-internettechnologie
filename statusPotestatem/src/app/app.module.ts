@@ -8,13 +8,13 @@ import {ChartsModule} from 'ng2-charts';
 import {AppComponent} from './app.component';
 import {CurrentRawValuesComponent} from './currentRawValues/currentRawValues.component';
 import {CurrentConsumptionComponent} from './currentConsumption/currentConsumption.component';
-import {costsComponent} from './costs/costs.component';
-import {pastConsumptionComponent} from './pastConsumption/pastConsumption.component';
-import {trendComponent} from './trend/trend.component';
+import {CostsComponent} from './costs/costs.component';
+import {PastConsumptionComponent} from './pastConsumption/pastConsumption.component';
+import {TrendComponent} from './trend/trend.component';
 
 @NgModule({
   declarations: [
-    AppComponent, CurrentRawValuesComponent, CurrentConsumptionComponent, costsComponent, pastConsumptionComponent, trendComponent
+    AppComponent, CurrentRawValuesComponent, CurrentConsumptionComponent, CostsComponent, PastConsumptionComponent, TrendComponent
   ],
   imports: [BrowserModule, FormsModule, HttpModule, routing, ChartsModule],
   providers: [],

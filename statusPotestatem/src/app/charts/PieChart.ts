@@ -1,5 +1,5 @@
 export interface PieChart {
-  pieChartLabels: string[] ;
+  pieChartLabels: string[];
   pieChartData: number[];
   pieChartType: string;
 
