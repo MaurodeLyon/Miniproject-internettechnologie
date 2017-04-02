@@ -5,12 +5,11 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class PostsService {
   constructor(private http: Http) {
-    console.log('PostsService Initialized...')
+    console.log('PostsService Initialized...');
   }
 
   getMauroMeasurements() {
-    //return this.http.get('https://vestigiumserver.herokuapp.com/api/measurements/users/Mauro').map(res => res.json());
-    return this.http.get('https://vestigiumserver.herokuapp.com/api/mauro_meting').map(res => res.json());
+    return this.http.get('https://vestigiumserver.herokuapp.com/api/website/Mauro').map(res => res.json());
   }
 
   getArthurMeasurements() {

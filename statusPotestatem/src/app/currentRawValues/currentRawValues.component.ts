@@ -1,29 +1,56 @@
 import {Component} from '@angular/core';
-import  {PostsService} from '../services/posts.service';
-import {data} from '../services/Data'
+import {PostsService} from '../services/posts.service';
+import {LineChart} from '../charts/LineChart';
 
 @Component({
-  selector: 'currentRawValues',
+  selector: 'app-current-raw-values',
   templateUrl: 'currentRawValues.component.html',
   providers: [PostsService]
 
 })
 export class CurrentRawValuesComponent {
-  mauroMeasurements: data;
-  arthurMeasurements: data;
+  mauroLineChart: MauroLineChart;
+  arthurLineChart: ArthurLineChart;
 
-  public mauroLineChartData: any;
-  public mauroLineChartLabels: Array<any>;
+  constructor(private postsService: PostsService) {
+    this.postsService.getArthurMeasurements().subscribe(posts => {
+      this.arthurLineChart = new MauroLineChart();
+      this.arthurLineChart.lineChartLabels = [];
+      this.arthurLineChart.lineChartData = [
+        {label: 'Raw tick data per hour', data: []}
+      ];
+      if (posts != null) {
+        const length = posts.results.length;
+        for (let i = 13; i > 1; i--) {
+          this.arthurLineChart.lineChartData[0].data.push(posts.results[length - i].ticks);
+          this.arthurLineChart.lineChartLabels.push(posts.results[length - i].hour);
+        }
+      }
+    });
+    this.postsService.getMauroMeasurements().subscribe(posts => {
+      this.mauroLineChart = new MauroLineChart();
+      this.mauroLineChart.lineChartLabels = [];
+      this.mauroLineChart.lineChartData = [
+        {label: 'Raw tick data per hour', data: []}
+      ];
+      if (posts != null) {
+        const length = posts.results.length;
+        for (let i = 13; i > 1; i--) {
+          this.mauroLineChart.lineChartData[0].data.push(posts.results[length - i].ticks);
+          this.mauroLineChart.lineChartLabels.push(posts.results[length - i].hour);
+        }
+      }
+    });
+  }
+}
 
-  public arthurLineChartData: any;
-  public arthurLineChartLabels: Array<any>;
-
-  public lineChartOptions: any = {
+class MauroLineChart implements LineChart {
+  lineChartData: Array<any>;
+  lineChartLabels: Array<any>;
+  lineChartOptions: any = {
     responsive: true
   };
-  public lineChartLegend: boolean = true;
-  public lineChartType: string = 'line';
-  public lineChartColors: Array<any> = [
+  lineChartColors: Array<any> = [
     {
       backgroundColor: 'rgba(148,159,177,0.2)',
       borderColor: 'rgba(148,159,177,1)',
@@ -32,43 +59,37 @@ export class CurrentRawValuesComponent {
       pointHoverBackgroundColor: '#fff',
       pointHoverBorderColor: 'rgba(148,159,177,0.8)'
     }];
+  lineChartLegend: any = true;
+  lineChartType: any = 'line';
 
-  constructor(private postsService: PostsService) {
-    this.postsService.getArthurMeasurements().subscribe(posts => {
-      this.arthurMeasurements = posts;
-      this.genArthurLineData();
-    });
-    this.postsService.getMauroMeasurements().subscribe(posts => {
-      this.mauroMeasurements = posts;
-      this.genMauroLineData();
-    });
+  chartClicked(e: any): void {
   }
 
-  public genArthurLineData(): void {
-    this.arthurLineChartData = [
-      {label: 'Raw tick data per hour', data: []}
-    ];
-    this.arthurLineChartLabels = [];
-    if (this.arthurMeasurements != null) {
-      let length = this.arthurMeasurements.results.length;
-      for (let i = 13; i > 1; i--) {
-        this.arthurLineChartData[0].data.push(this.arthurMeasurements.results[length - i].ticks);
-        this.arthurLineChartLabels.push(this.arthurMeasurements.results[length - i].hour);
-      }
-    }
+  chartHovered(e: any): void {
+  }
+}
+
+class ArthurLineChart implements LineChart {
+  lineChartData: Array<any>;
+  lineChartLabels: Array<any>;
+  lineChartOptions: any = {
+    responsive: true
+  };
+  lineChartColors: Array<any> = [
+    {
+      backgroundColor: 'rgba(148,159,177,0.2)',
+      borderColor: 'rgba(148,159,177,1)',
+      pointBackgroundColor: 'rgba(148,159,177,1)',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
+    }];
+  lineChartLegend: any = true;
+  lineChartType: any = 'line';
+
+  chartClicked(e: any): void {
   }
 
-  public genMauroLineData(): void {
-    this.mauroLineChartData = [
-      {label: 'Raw tick data per hour', data: []}
-    ];
-    this.mauroLineChartLabels = [];
-    if (this.mauroMeasurements != null) {
-      let length = this.mauroMeasurements.results.length;
-      for (let i = 13; i > 1; i--) {
-        this.mauroLineChartData[0].data.push(this.mauroMeasurements.results[length - i].ticks);
-        this.mauroLineChartLabels.push(this.mauroMeasurements.results[length - i].hour);
-      }
-    }
+  chartHovered(e: any): void {
   }
 }
