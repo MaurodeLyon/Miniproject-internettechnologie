@@ -1,19 +1,19 @@
-export class data {
-  currentData: currentData;
-  results: results[];
+export class Data {
+  currentData: CurrentData;
+  results: Results[];
 }
 
-export interface currentData {
+export interface CurrentData {
   ticks: number;
   hour: number;
 }
 
-export interface results {
+export interface Results {
   id: number;
   ticks: number;
   hour: number;
   day: number;
   month: number;
-  year: number
+  year: number;
 }
 

@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
-import {PostsService} from "../services/posts.service";
-import {BarChart} from "../charts/BarChart";
+import {PostsService} from '../services/posts.service';
+import {BarChart} from '../charts/BarChart';
 
 @Component({
   selector: 'app-root',
@@ -8,25 +8,24 @@ import {BarChart} from "../charts/BarChart";
   providers: [PostsService]
 })
 
-export class costsComponent {
+export class CostsComponent {
   mauroBarChart: MauroBarChart;
   arthurBarChart: ArthurBarChart;
 
   constructor(private postsService: PostsService) {
     this.postsService.getMauroMeasurements().subscribe(posts => {
       this.mauroBarChart = new MauroBarChart();
-      let price = [];
-      let date = [];
+      const price = [];
+      const date = [];
       let ticksPerDay = 0;
       let prevDay = posts.results[0].day;
       for (let i = 0; i < posts.results.length; i++) {
-        let currentDay = posts.results[i].day;
-        if (currentDay == prevDay) {
+        const currentDay = posts.results[i].day;
+        if (currentDay === prevDay) {
           ticksPerDay += posts.results[i].ticks;
-        }
-        else {
+        } else {
           price.push(ticksPerDay * 0.00023);
-          date.push(posts.results[i].day + "-" + posts.results[i].month);
+          date.push(posts.results[i].day + '-' + posts.results[i].month);
           ticksPerDay = 0;
         }
         prevDay = currentDay;
@@ -37,18 +36,17 @@ export class costsComponent {
 
     this.postsService.getArthurMeasurements().subscribe(posts => {
       this.arthurBarChart = new ArthurBarChart();
-      let price = [];
-      let date = [];
+      const price = [];
+      const date = [];
       let ticksPerDay = 0;
       let prevDay = posts.results[0].day;
       for (let i = 0; i < posts.results.length; i++) {
-        let currentDay = posts.results[i].day;
-        if (currentDay == prevDay) {
+        const currentDay = posts.results[i].day;
+        if (currentDay === prevDay) {
           ticksPerDay += (posts.results[i].ticks / 187.5) * 1000;
-        }
-        else {
+        } else {
           price.push(ticksPerDay * 0.00023);
-          date.push(posts.results[i].day + "-" + posts.results[i].month);
+          date.push(posts.results[i].day + '-' + posts.results[i].month);
           ticksPerDay = 0;
         }
         prevDay = currentDay;
@@ -65,8 +63,8 @@ class ArthurBarChart implements BarChart {
     responsive: true
   };
   barChartLabels: string[];
-  barChartType: string = 'bar';
-  barChartLegend: boolean = true;
+  barChartType: any = 'bar';
+  barChartLegend: any = true;
   barChartData: any[] = [{data: [], label: '€'}];
 
   chartClicked(e: any): void {
@@ -82,8 +80,8 @@ class MauroBarChart implements BarChart {
     responsive: true
   };
   barChartLabels: string[];
-  barChartType: string = 'bar';
-  barChartLegend: boolean = true;
+  barChartType: any = 'bar';
+  barChartLegend: any = true;
   barChartData: any[] = [{data: [], label: '€'}];
 
   chartClicked(e: any): void {
