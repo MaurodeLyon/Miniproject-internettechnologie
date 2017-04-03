@@ -23,7 +23,7 @@ export class TrendComponent {
     });
     this.postsService.getArthurMeasurements().subscribe(posts => {
       this.arthurMeasurements = posts;
-      this.arthurTrend = new TrendLineChart(true, 5);
+      this.arthurTrend = new TrendLineChart(true, 4);
       this.arthurTrend.genListData(posts);
     });
   }
