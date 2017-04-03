@@ -35,10 +35,11 @@ export class CurrentRawValuesComponent {
       ];
       if (posts != null) {
         const length = posts.results.length;
-        for (let i = 13; i > 1; i--) {
+        for (let i = 12; i > 0; i--) {
           this.mauroLineChart.lineChartData[0].data.push(posts.results[length - i].ticks);
           this.mauroLineChart.lineChartLabels.push(posts.results[length - i].hour);
         }
+        console.log(this.mauroLineChart.lineChartData);
       }
     });
   }
