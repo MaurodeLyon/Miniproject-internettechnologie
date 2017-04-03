@@ -39,7 +39,6 @@ export class CurrentRawValuesComponent {
           this.mauroLineChart.lineChartData[0].data.push(posts.results[length - i].ticks);
           this.mauroLineChart.lineChartLabels.push(posts.results[length - i].hour);
         }
-        console.log(this.mauroLineChart.lineChartData);
       }
     });
   }
