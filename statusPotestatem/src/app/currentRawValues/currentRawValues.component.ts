@@ -9,12 +9,12 @@ import {LineChart} from '../charts/LineChart';
 
 })
 export class CurrentRawValuesComponent {
-  mauroLineChart: MauroLineChart;
-  arthurLineChart: ArthurLineChart;
+  mauroLineChart: RawValuesLineChart;
+  arthurLineChart: RawValuesLineChart;
 
   constructor(private postsService: PostsService) {
     this.postsService.getArthurMeasurements().subscribe(posts => {
-      this.arthurLineChart = new MauroLineChart();
+      this.arthurLineChart = new RawValuesLineChart('rgba(153, 210, 246,0.2)','rgba(153, 210, 246,1)');
       this.arthurLineChart.lineChartLabels = [];
       this.arthurLineChart.lineChartData = [
         {label: 'Raw tick data per hour', data: []}
@@ -28,7 +28,7 @@ export class CurrentRawValuesComponent {
       }
     });
     this.postsService.getMauroMeasurements().subscribe(posts => {
-      this.mauroLineChart = new MauroLineChart();
+      this.mauroLineChart = new RawValuesLineChart('rgba(66,66,69,0.2)','rgba(66,66,69,1)');
       this.mauroLineChart.lineChartLabels = [];
       this.mauroLineChart.lineChartData = [
         {label: 'Raw tick data per hour', data: []}
@@ -44,7 +44,7 @@ export class CurrentRawValuesComponent {
   }
 }
 
-class MauroLineChart implements LineChart {
+class RawValuesLineChart implements LineChart {
   lineChartData: Array<any>;
   lineChartLabels: Array<any>;
   lineChartOptions: any = {
@@ -62,30 +62,18 @@ class MauroLineChart implements LineChart {
   lineChartLegend: any = true;
   lineChartType: any = 'line';
 
-  chartClicked(e: any): void {
-  }
-
-  chartHovered(e: any): void {
-  }
-}
-
-class ArthurLineChart implements LineChart {
-  lineChartData: Array<any>;
-  lineChartLabels: Array<any>;
-  lineChartOptions: any = {
-    responsive: true
-  };
-  lineChartColors: Array<any> = [
+  constructor(backgroundColor: any, pointColor: any)
+  {
+    this.lineChartColors = [
     {
-      backgroundColor: 'rgba(148,159,177,0.2)',
+      backgroundColor: backgroundColor,
       borderColor: 'rgba(148,159,177,1)',
-      pointBackgroundColor: 'rgba(148,159,177,1)',
+      pointBackgroundColor: pointColor,
       pointBorderColor: '#fff',
       pointHoverBackgroundColor: '#fff',
       pointHoverBorderColor: 'rgba(148,159,177,0.8)'
     }];
-  lineChartLegend: any = true;
-  lineChartType: any = 'line';
+  }
 
   chartClicked(e: any): void {
   }
@@ -93,3 +81,5 @@ class ArthurLineChart implements LineChart {
   chartHovered(e: any): void {
   }
 }
+
+

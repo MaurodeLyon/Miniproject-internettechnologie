@@ -18,12 +18,12 @@ export class TrendComponent {
   constructor(private postsService: PostsService) {
     this.postsService.getMauroMeasurements().subscribe(posts => {
       this.mauroMeasurements = posts;
-      this.mauroTrend = new TrendLineChart(false, 4);
+      this.mauroTrend = new TrendLineChart(false, 4,'rgba(66,66,69,0.2)','rgba(66,66,69,1)');
       this.mauroTrend.genListData(posts);
     });
     this.postsService.getArthurMeasurements().subscribe(posts => {
       this.arthurMeasurements = posts;
-      this.arthurTrend = new TrendLineChart(true, 4);
+      this.arthurTrend = new TrendLineChart(true, 4,'rgba(153, 210, 246,0.2)','rgba(153, 210, 246,1)');
       this.arthurTrend.genListData(posts);
     });
   }
@@ -38,9 +38,9 @@ class TrendLineChart implements LineChart {
   public lineChartType: any = 'line';
   public lineChartColors: Array<any> = [
     {
-      backgroundColor: 'rgba(148,159,177,0.2)',
+      backgroundColor: 'rgba(4, 41, 247,0.2)',
       borderColor: 'rgba(148,159,177,1)',
-      pointBackgroundColor: 'rgba(148,159,177,1)',
+      pointBackgroundColor: 'rgba(24, 58, 249,1)',
       pointBorderColor: '#fff',
       pointHoverBackgroundColor: '#fff',
       pointHoverBorderColor: 'rgba(148,159,177,0.8)'
@@ -49,9 +49,18 @@ class TrendLineChart implements LineChart {
   dialMeter: any = false;
   times: any = 0;
 
-  constructor(dialMeter: boolean, times: number) {
+  constructor(dialMeter: boolean, times: number,backgroundColor:any,pointColor:any) {
     this.dialMeter = dialMeter;
     this.times = times;
+    this.lineChartColors= [
+      {
+        backgroundColor: backgroundColor,
+        borderColor: 'rgba(148,159,177,1)',
+        pointBackgroundColor: pointColor,
+        pointBorderColor: '#fff',
+        pointHoverBackgroundColor: '#fff',
+        pointHoverBorderColor: 'rgba(148,159,177,0.8)'
+      }];
   }
 
   public genListData(values: Data): void {

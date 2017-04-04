@@ -9,12 +9,12 @@ import {BarChart} from '../charts/BarChart';
 })
 
 export class CostsComponent {
-  mauroBarChart: MauroBarChart;
-  arthurBarChart: ArthurBarChart;
+  mauroBarChart: CostBarChart;
+  arthurBarChart: CostBarChart;
 
   constructor(private postsService: PostsService) {
     this.postsService.getMauroMeasurements().subscribe(posts => {
-      this.mauroBarChart = new MauroBarChart();
+      this.mauroBarChart = new CostBarChart();
       const price = [];
       const date = [];
       let ticksPerDay = 0;
@@ -35,7 +35,7 @@ export class CostsComponent {
     });
 
     this.postsService.getArthurMeasurements().subscribe(posts => {
-      this.arthurBarChart = new ArthurBarChart();
+      this.arthurBarChart = new CostBarChart();
       const price = [];
       const date = [];
       let ticksPerDay = 0;
@@ -57,7 +57,7 @@ export class CostsComponent {
   }
 }
 
-class ArthurBarChart implements BarChart {
+class CostBarChart implements BarChart {
   barChartOptions: any = {
     scaleShowVerticalLines: false,
     responsive: true
@@ -74,19 +74,3 @@ class ArthurBarChart implements BarChart {
   }
 }
 
-class MauroBarChart implements BarChart {
-  barChartOptions: any = {
-    scaleShowVerticalLines: false,
-    responsive: true
-  };
-  barChartLabels: string[];
-  barChartType: any = 'bar';
-  barChartLegend: any = true;
-  barChartData: any[] = [{data: [], label: '€'}];
-
-  chartClicked(e: any): void {
-  }
-
-  chartHovered(e: any): void {
-  }
-}
